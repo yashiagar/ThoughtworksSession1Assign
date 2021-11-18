@@ -1,0 +1,36 @@
+package com.tw;
+import java.util.Scanner;
+
+public class salaryCalculation {
+    public static void main(String[] args){
+        Scanner scan=new Scanner(System.in);
+        int[] wrkdHrs;
+        wrkdHrs=new int[7];
+        for(int i=0;i<7;i++){
+            wrkdHrs[i]= scan.nextInt();
+        }
+        int salary=0,weeklyWrkdHrs=0;
+        for(int i=0;i<7;i++){
+            if(i==0){
+                salary+=wrkdHrs[i]*100+(wrkdHrs[i]*100)/2;
+            }
+            else if(i==6){
+                salary+=wrkdHrs[i]*100+(wrkdHrs[i]*100)/4;
+            }
+            else{
+                salary+=wrkdHrs[i]*100;
+                if(wrkdHrs[i]>8){
+                    salary+=(wrkdHrs[i]-8)*15;
+                }
+                if(weeklyWrkdHrs>40){
+                    salary+=wrkdHrs[i]*25;
+                }
+                else if((40-weeklyWrkdHrs)>0 && (40-weeklyWrkdHrs)<=wrkdHrs[i]){
+                    salary+=(wrkdHrs[i]+weeklyWrkdHrs-40)*25;
+                }
+                weeklyWrkdHrs+=wrkdHrs[i];
+            }
+        }
+        System.out.println(salary);
+    }
+}

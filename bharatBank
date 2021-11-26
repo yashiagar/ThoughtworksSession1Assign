@@ -1,0 +1,50 @@
+package Yashi;
+
+import java.util.Scanner;
+
+public class bharatBank {
+    private int bal;
+    private final String type;
+
+    bharatBank(int bal, String type) {
+        this.bal = bal;
+        this.type = type;
+    }
+
+    public void deposite(int value) {
+        this.bal += value;
+    }
+
+    public void withdraw(int value) {
+        this.bal =(int) (this.bal+ quaterlyInterest());
+
+        if (this.bal >= value) {
+            this.bal =this.bal- value;
+        } else {
+            if (this.type.equalsIgnoreCase("current") && this.bal > 0 && value <= this.bal * 1.2) {
+                this.bal = this.bal-value;
+            } else {
+                System.out.println("It is not possible");
+            }
+        }
+    }
+
+    public double quaterlyinterest() {
+        double savingrate = 3;
+        if (this.type.equalsIgnoreCase("current")) {
+            return 0;
+        } else {
+            return (this.bal * (100/3) * (1/4));
+        }
+    }
+
+    public static void main(String args[]) {
+        bharatBank gopal = new bharatBank(50000, "current");
+        bharatBank amrita = new bharatBank(1000000, "saving");
+        gopal.deposite(10000);
+        System.out.println("Gopal balance:" + gopal.quaterlyinterest());
+        gopal.withdraw(70000);
+        amrita.withdraw(45000);
+        System.out.println("Amrita balance:" + amrita.quaterlyinterest());
+    }
+}
